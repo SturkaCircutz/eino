@@ -1,4 +1,4 @@
-package main
+package index
 
 import (
 	"context"
@@ -9,11 +9,10 @@ import (
 
 var MilvusCli cli.Client
 
-func InitClient() {
-
-	ctx := context.Background()
+func InitClient(ctx context.Context) {
 	client, err := cli.NewClient(ctx, cli.Config{
 		Address: "localhost:19530",
+		DBName:  "eino",
 	})
 	if err != nil {
 		log.Fatalf("Failed to create client: %v", err)

@@ -1,4 +1,4 @@
-package main
+package embed
 
 import (
 	"context"
@@ -6,15 +6,9 @@ import (
 	"os"
 
 	"github.com/cloudwego/eino-ext/components/embedding/openai"
-	"github.com/joho/godotenv"
 )
 
-func main() {
-	err := godotenv.Load()
-	if err != nil {
-		panic(err)
-	}
-	ctx := context.Background()
+func EmbedText(ctx context.Context) {
 	embedder, err := openai.NewEmbedder(ctx, &openai.EmbeddingConfig{
 		APIKey:  os.Getenv("COHERE_API_KEY"),
 		BaseURL: os.Getenv("COHERE_BASE_URL"),
