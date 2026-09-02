@@ -1,2 +1,6 @@
 .env
 .txt
+/volumes
+go.mod
+go.sum
+my-agent
