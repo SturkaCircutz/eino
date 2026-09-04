@@ -26,6 +26,7 @@ var fields = []*entity.Field{
 		Name:     "vector", // 确保字段名匹配
 		DataType: entity.FieldTypeBinaryVector,
 		TypeParams: map[string]string{
+			// binary vector dim is in bits: 1024 floats * 4 bytes * 8 = 32768
 			"dim": "32768",
 		},
 	},
@@ -42,14 +43,31 @@ var fields = []*entity.Field{
 	},
 }
 
-/*
-schema.Document is a container for a piece of text plus info about that text
+// schema.Document is a container for a piece of text plus info about that text
+var Docs = []*schema.Document{
+	{
+		ID:      "1",
+		Content: "My name is John and I am 13 years old.",
+		MetaData: map[string]any{
+			"author": "jiawen",
+		},
+	},
+	{
+		ID:      "2",
+		Content: "wo ai yuan shen!!!",
+		MetaData: map[string]any{
+			"author": "jiawen",
+		},
+	},
+	{
+		ID:      "3",
+		Content: "wo ai yuan shen",
+		MetaData: map[string]any{
+			"author": "jiawen",
+		},
+	},
+}
 
-	doc := &schema.Document{
-	    ID:      "1",
-	    Content: "My name is John and I am 13 years old.",
-	}
-*/
 func IndexRAG(ctx context.Context, docs []*schema.Document) {
 	embedder, err := openai.NewEmbedder(ctx, &openai.EmbeddingConfig{
 		APIKey:  os.Getenv("COHERE_API_KEY"),

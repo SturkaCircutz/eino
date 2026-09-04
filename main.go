@@ -4,9 +4,10 @@ import (
 	"context"
 	"log"
 
-	"github.com/cloudwego/eino/schema"
-	"github.com/joho/godotenv"
 	"my-agent/index"
+	"my-agent/retriever"
+
+	"github.com/joho/godotenv"
 )
 
 func main() {
@@ -16,11 +17,8 @@ func main() {
 	ctx := context.Background()
 
 	index.InitClient(ctx)
-	index.IndexRAG(ctx, []*schema.Document{
-		{ID: "1", Content: "My name is John and I am 13 years old."},
-		{ID: "2", Content: "The capital of France is Paris."},
-	})
-
+	index.IndexRAG(ctx, index.Docs)
+	retriever.Retrieve(ctx, "yuanshen")
 	// flow.Chat(ctx)          // add "my-agent/flow" to the imports above
 	// embed.EmbedText(ctx)    // add "my-agent/embed" to the imports above
 }
